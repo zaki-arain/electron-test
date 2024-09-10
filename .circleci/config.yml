@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  node: circleci/node@6.1.0
+
 executors:
     linux-docker:
         docker:
@@ -30,7 +33,6 @@ workflows:
             parameters:
               os: [linux-docker, macos-medium]
 
-
 jobs:
   build-and-test:
     parameters:
@@ -40,14 +42,9 @@ jobs:
     working_directory: ~/test-electron
     steps:
       - checkout
-      - run:
-          name: Install Node
-          command: |
-              nvm install 20.11.1
-              nvm use 20.11.1
-      - run:
-          name: Install Yarn
-          command: npm install -g yarn
+      - node/install:
+          install-yarn: true
+          node-version: '20.12.2'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
