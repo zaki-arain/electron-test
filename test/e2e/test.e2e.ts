@@ -8,37 +8,37 @@ describe('Electron Testing', () => {
       .toBe('1.0.0')
   })
 
-  // it('can click on button', async () => {
-  //   const btn = await $('>>>.card').$('button')
-  //   await expect(btn).toHaveText('count is 0')
-  //   await btn.click()
-  //   await expect(btn).toHaveText('count is 1')
-  // })
+  it('can click on button', async () => {
+    const btn = await $('>>>.card').$('button')
+    await expect(btn).toHaveText('count is 0')
+    await btn.click()
+    await expect(btn).toHaveText('count is 1')
+  })
 
-  // /**
-  //  * fails as application freezes after alert pops up
-  //  */
-  // it.skip('can click the button until a dialog pops up', async () => {
-  //   const btn = await $('>>>.card').$('button')
-  //   await expect(btn).toHaveText('count is 1')
-  //   await btn.click()
-  //   await btn.click()
-  //   await btn.click()
-  //   await btn.click()
-  //   await btn.click()
-  //   await expect(await browser.isAlertOpen()).toBe(true)
-  //   await browser.dismissAlert()
-  // })
+  /**
+   * fails as application freezes after alert pops up
+   */
+  it.skip('can click the button until a dialog pops up', async () => {
+    const btn = await $('>>>.card').$('button')
+    await expect(btn).toHaveText('count is 1')
+    await btn.click()
+    await btn.click()
+    await btn.click()
+    await btn.click()
+    await btn.click()
+    await expect(await browser.isAlertOpen()).toBe(true)
+    await browser.dismissAlert()
+  })
 
-  // it('can mock the dialog call', async () => {
-  //   await browser.electron.mock('dialog', 'showMessageBox', {})
-  //   const btn = await $('>>>.card').$('button')
-  //   await btn.click()
-  //   await btn.click()
-  //   await btn.click()
-  //   await btn.click()
-  //   await btn.click()
-  //   await expect(await browser.isAlertOpen()).toBe(false)
-  //   await expect(btn).toHaveText('count is 6')
-  // })
+  it('can mock the dialog call', async () => {
+    await browser.electron.mock('dialog', 'showMessageBox', {})
+    const btn = await $('>>>.card').$('button')
+    await btn.click()
+    await btn.click()
+    await btn.click()
+    await btn.click()
+    await btn.click()
+    await expect(await browser.isAlertOpen()).toBe(false)
+    await expect(btn).toHaveText('count is 6')
+  })
 })
