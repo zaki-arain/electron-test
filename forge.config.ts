@@ -8,7 +8,7 @@ import type { ForgeConfig } from '@electron-forge/shared-types'
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    prune: process.env.NODE_ENV !== 'test',
+    prune: false,
   },
   rebuildConfig: {},
   makers: [

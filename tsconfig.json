@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.stencil.json",
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "NodeNext",
     "target": "es2020",
     "outDir": "dist",
     "esModuleInterop": true,
