@@ -1,8 +1,6 @@
-import type { Options } from '@wdio/types'
-
 process.env.TEST = 'true'
 
-export const config: Options.Testrunner = {
+export const config: WebdriverIO.Config = {
     //
     // ====================
     // Runner Configuration
@@ -55,7 +53,20 @@ export const config: Options.Testrunner = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-      browserName: 'electron'
+      browserName: 'electron',
+      'goog:chromeOptions': {
+              args: [
+                'disable-gpu',
+                'window-size=1280,800',
+                'no-sandbox',
+                'disable-dev-shm-usage',
+                'disable-setuid-sandbox',
+                'enable-automation',
+                'disable-infobars',
+                'disable-extensions',
+                'blink-settings=imagesEnabled=false'
+              ]
+          }
     }],
 
     //
@@ -65,7 +76,7 @@ export const config: Options.Testrunner = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'debug',
     //
     // Set specific log levels per logger
     // loggers:

@@ -19,8 +19,8 @@
     "start:ts": "sleep 2 && tsc -w -p ./tsconfig.json",
     "start:stencil": "stencil build --dev --watch",
     "test": "run-s test:*",
-    "test:singleremote": "cross-env NODE_ENV=tefst wdio run ./test/wdio.conf.ts",
-    "test:multiremote": "cross-env NODE_ENV=tefst wdio run ./test/wdio.multiremote.conf.ts",
+    "test:singleremote": "cross-env NODE_ENV=test wdio run ./test/wdio.conf.ts",
+    "test:multiremote": "cross-env NODE_ENV=test wdio run ./test/wdio.multiremote.conf.ts",
     "watch": "run-s start"
   },
   "keywords": [],
