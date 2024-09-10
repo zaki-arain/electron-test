@@ -31,7 +31,7 @@ workflows:
       - build-and-test:
           matrix:
             parameters:
-              os: [linux-docker, macos-medium]
+              os: [macos-medium, macos-medium-rosetta, macos-rosetta]
 
 jobs:
   build-and-test:
