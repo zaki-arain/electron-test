@@ -1,0 +1,70 @@
+version: 2.1
+executors:
+    linux-docker:
+        docker:
+            - image: cimg/node:20.12.2
+    # macos:
+    #     macos:
+    #         xcode: 14.2.0
+    #     resource_class: m2pro.medium.test
+    macos-medium:
+        macos:
+            xcode: 14.2.0
+        resource_class: macos.m1.medium.gen1
+    macos-medium-rosetta:
+        macos:
+            xcode: 14.2.0
+        resource_class: macos.m1.medium.gen1
+        shell: arch -x86_64 /bin/bash --login -c
+    macos-rosetta:
+        macos:
+            xcode: 14.2.0
+        resource_class: macos.m1.large.gen1
+        shell: arch -x86_64 /bin/bash --login -c
+
+workflows:
+  docker-mac-tests:
+    jobs:
+      - build-and-test:
+          matrix:
+            parameters:
+              os: [linux-docker, macos-medium]
+
+
+jobs:
+  build-and-test:
+    parameters:
+          os:
+            type: executor
+    executor: << parameters.os >>
+    working_directory: ~/test-electron
+    steps:
+      - checkout
+      - run:
+          name: Install Node
+          command: |
+              nvm install 20.11.1
+              nvm use 20.11.1
+      - run:
+          name: Install Yarn
+          command: npm install -g yarn
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Generate Builds
+          command: yarn make
+      - run:
+          name: Generate Package
+          command: yarn package
+      - store_artifacts:
+          path: ~/test-electron/out/make
+      - run:
+          name: Test
+          command: yarn test
