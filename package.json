@@ -1,6 +1,6 @@
 {
   "name": "electron-boilerplate",
-  "productName": "WebdriverIO + Electron Boilerplate",
+  "productName": "postman-test",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "dist/app.js",
@@ -19,8 +19,8 @@
     "start:ts": "sleep 2 && tsc -w -p ./tsconfig.json",
     "start:stencil": "stencil build --dev --watch",
     "test": "run-s test:*",
-    "test:singleremote": "cross-env NODE_ENV=test wdio run ./test/wdio.conf.ts",
-    "test:multiremote": "cross-env NODE_ENV=test wdio run ./test/wdio.multiremote.conf.ts",
+    "test:singleremote": "cross-env NODE_ENV=tefst wdio run ./test/wdio.conf.ts",
+    "test:multiremote": "cross-env NODE_ENV=tefst wdio run ./test/wdio.multiremote.conf.ts",
     "watch": "run-s start"
   },
   "keywords": [],
@@ -29,6 +29,18 @@
     "email": "git@bromann.dev"
   },
   "license": "MIT",
+  "overrides": {
+    "@electron-forge/cli": {
+      "@electron-forge/core": {
+        "@electron/packager": {
+          "@electron/asar": "3.2.10"
+        }
+      }
+    }
+  },
+  "resolutions": {
+    "@electron/asar": "3.2.10"
+  },
   "dependencies": {
     "@stencil/core": "4.21.0",
     "electron-squirrel-startup": "^1.0.1",

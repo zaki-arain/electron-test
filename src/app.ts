@@ -8,7 +8,7 @@ if (squirrelStartup) {
   app.quit()
 }
 
-const title = 'WebdriverIO + Electron Boilerplate'
+const title = 'postman-test title'
 const isTest = process.env.NODE_ENV === 'test'
 const isDev = process.env.NODE_ENV === 'dev'
 if (isTest) {
@@ -18,12 +18,12 @@ if (isTest) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768,
+    width: 1200,
+    height: 800,
     title,
-    resizable: false,
+    resizable: false,,
     webPreferences: {
-      sandbox: !isTest,
+      sandbox: false,
       preload: path.join(__dirname, 'preload.js'),
     }
   })
